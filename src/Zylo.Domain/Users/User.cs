@@ -40,6 +40,8 @@ public sealed class User : Entity, IAuditable, ISoftDeletable
 
     public LastName LastName { get; private set; }
 
+    public string FullName => $"{FirstName} {LastName}";
+
     public string PasswordHash { get; private set; }
 
     public bool EmailVerified { get; private set; }
@@ -111,5 +113,28 @@ public sealed class User : Entity, IAuditable, ISoftDeletable
     internal void RemoveFriendship(Friendship friendship)
     {
         Raise(new FriendshipRemovedDomainEvent(friendship.Id));
+    }
+
+    public async Task<Result<FriendRequest>> SendFriendshipRequestAsync(
+        Guid friendId,
+        IFriendshipRepository friendshipRepository,
+        IFriendRequestRepository friendRequestRepository,
+        CancellationToken cancellationToken = default)
+    {
+        if (await friendshipRepository.CheckIfFriendsAsync(Id, friendId, cancellationToken))
+        {
+            return Result.Failure<FriendRequest>(FriendshipErrors.AlreadyFriends);
+        }
+
+        if (await friendRequestRepository.HasPendingFriendRequestAsync(Id, friendId, cancellationToken))
+        {
+            return Result.Failure<FriendRequest>(FriendshipErrors.PendingFriendshipRequest);
+        }
+
+        var friendRequest = new FriendRequest(Id, friendId);
+
+        Raise(new FriendRequestSentDomainEvent(friendRequest.Id));
+
+        return friendRequest;
     }
 }
