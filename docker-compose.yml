@@ -1,0 +1,10 @@
+services:
+  zylo.api:
+    image: ${DOCKER_REGISTRY-}zyloapi
+    build:
+      context: .
+      dockerfile: src/Zylo.Api/Dockerfile
+    ports:
+      - "5000"
+      - "5001"
+

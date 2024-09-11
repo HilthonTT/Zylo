@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>e61e0bbb-9254-4726-a328-4f3b65972593</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zylo.Application\Zylo.Application.csproj" />
+    <ProjectReference Include="..\Zylo.Domain\Zylo.Domain.csproj" />
+    <ProjectReference Include="..\Zylo.Infrastructure\Zylo.Infrastructure.csproj" />
+    <ProjectReference Include="..\Zylo.Persistence\Zylo.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
