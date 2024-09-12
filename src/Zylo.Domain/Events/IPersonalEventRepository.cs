@@ -2,5 +2,9 @@
 
 public interface IPersonalEventRepository
 {
-    Task<PersonalEvent>
+    Task<PersonalEvent> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task<List<PersonalEvent>> GetUnProcessedAsync(int take, CancellationToken cancellationToken = default);
+
+    void Insert(PersonalEvent personalEvent);
 }
