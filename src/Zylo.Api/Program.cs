@@ -1,4 +1,5 @@
 using Zylo.Api.Extensions;
+using Zylo.Application;
 using Zylo.Infrastructure;
 using Zylo.Persistence;
 
@@ -9,9 +10,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration)
+    .AddApplication();
 
 WebApplication app = builder.Build();
+
+app.UseBackgroundJobs();
 
 if (app.Environment.IsDevelopment())
 {

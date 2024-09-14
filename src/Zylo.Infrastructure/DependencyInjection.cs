@@ -17,6 +17,7 @@ using Zylo.Infrastructure.Authentication.Options;
 using Zylo.Infrastructure.Caching;
 using Zylo.Infrastructure.Events;
 using Zylo.Infrastructure.Notifications.Options;
+using Zylo.Infrastructure.Outbox;
 using Zylo.Infrastructure.Time;
 
 namespace Zylo.Infrastructure;
@@ -93,6 +94,8 @@ public static class DependencyInjection
                 options.UseNpgsqlConnection(connectionString)));
 
         services.AddHangfireServer(options => options.SchedulePollingInterval = TimeSpan.FromSeconds(1));
+
+        services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
 
         return services;
     }
