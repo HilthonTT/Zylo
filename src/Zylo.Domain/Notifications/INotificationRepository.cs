@@ -5,7 +5,7 @@ namespace Zylo.Domain.Notifications;
 
 public interface INotificationRepository
 {
-    Task<(Notification Notification, Event Event, User User)[]> GetNotificationsToBeSentIncludingUserAndEvent(
+    Task<(Notification Notification, Event Event, User User)[]> GetNotificationsToBeSentIncludingUserAndEventAsync(
             int batchSize,
             DateTime utcNow,
             int allowedNotificationTimeDiscrepancyInMinutes,

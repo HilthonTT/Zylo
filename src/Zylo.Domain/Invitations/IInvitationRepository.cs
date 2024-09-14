@@ -12,7 +12,13 @@ public interface IInvitationRepository
 
     void Insert(Invitation invitation);
 
-    Task RemovePendingInvitationsForFriendshipAsync(Friendship friendship, DateTime utcNow);
+    Task RemovePendingInvitationsForFriendshipAsync(
+        Friendship friendship, 
+        DateTime utcNow, 
+        CancellationToken cancellationToken = default);
 
-    Task RemoveInvitationsForGroupEventAsync(GroupEvent groupEvent, DateTime utcNow);
+    Task RemoveInvitationsForGroupEventAsync(
+        GroupEvent groupEvent, 
+        DateTime utcNow,
+        CancellationToken cancellationToken = default);
 }

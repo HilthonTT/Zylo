@@ -1,4 +1,6 @@
 ﻿using SharedKernel;
+using Zylo.Domain.Events;
+using Zylo.Domain.Users;
 
 namespace Zylo.Domain.Notifications;
 
@@ -35,6 +37,8 @@ public sealed class Notification : Entity, IAuditable, ISoftDeletable
 
     public DateTime DateTimeUtc { get; private set; }
 
+    public bool Sent { get; private set; }
+
     public DateTime CreatedOnUtc { get; set; }
 
     public DateTime? ModifiedOnUtc { get; set; }
@@ -42,4 +46,31 @@ public sealed class Notification : Entity, IAuditable, ISoftDeletable
     public DateTime? DeletedOnUtc { get; set; }
 
     public bool IsDeleted { get; set; }
+
+    public Result MarkAsSent()
+    {
+        if (Sent)
+        {
+            return Result.Failure(NotificationErrors.AlreadySent);
+        }
+
+        Sent = true;
+
+        return Result.Success();
+    }
+
+    public (string, string) CreateNotificationEmail(Event @event, User user)
+    {
+        if (@event.Id != EventId)
+        {
+            throw new InvalidOperationException("The specified event is not valid for this notification.");
+        }
+
+        if (user.Id != UserId)
+        {
+            throw new InvalidOperationException("The specified user is not valid for this notification.");
+        }
+
+        return Type.CreateNotificationEmail(@event, user);
+    }
 }

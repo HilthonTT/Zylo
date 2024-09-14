@@ -16,6 +16,7 @@ using Zylo.Infrastructure.Authentication;
 using Zylo.Infrastructure.Authentication.Options;
 using Zylo.Infrastructure.Caching;
 using Zylo.Infrastructure.Events;
+using Zylo.Infrastructure.Notifications.Options;
 using Zylo.Infrastructure.Time;
 
 namespace Zylo.Infrastructure;
@@ -27,6 +28,7 @@ public static class DependencyInjection
         services.AddServices();
         services.AddMessaging();
         services.AddAuthenticationInternal();
+        services.AddNotifications();
 
         services.AddBackgroundJobs(configuration);
         services.AddCaching(configuration);
@@ -36,9 +38,24 @@ public static class DependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssembly(InfrastructureReference.Assembly);
+        services.AddValidatorsFromAssembly(InfrastructureReference.Assembly, includeInternalTypes: true);
 
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddNotifications(this IServiceCollection services)
+    {
+        services.AddOptionsWithFluentValidation<EmailOptions>(EmailOptions.ConfigurationSection);
+
+        using var serviceProvider = services.BuildServiceProvider();
+
+        var emailOptions = serviceProvider.GetRequiredService<IOptions<EmailOptions>>().Value;
+
+        services
+            .AddFluentEmail(emailOptions.SenderEmail, emailOptions.Sender)
+            .AddSmtpSender(emailOptions.Host, emailOptions.Port);
 
         return services;
     }

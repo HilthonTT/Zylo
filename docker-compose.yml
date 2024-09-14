@@ -8,3 +8,29 @@ services:
       - "5000"
       - "5001"
 
+  zylo.postgres:
+    image: postgres:latest
+    container_name: zylo.database
+    environment:
+      - POSTGRES_DB=zylo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  zylo.redis:
+    image: redis:latest
+    container_name: zylo.redis
+    restart: always
+    ports:
+      - 6379:6379
+    
+  zylo.papercut:
+    image: changemakerstudiosus/papercut-smtp:latest
+    container_name: zylo.papercut
+    ports:
+     - 8080:80
+     - 25:25 
+   
