@@ -49,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IGroupEventRepository, GroupEventRepository>();
         services.AddScoped<IInvitationRepository, InvitationRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<IEmailVerificationCodeRepository, EmailVerificationCodeRepository>();
 
         services.AddSingleton<IDbConnectionFactory>(_ =>
             new DbConnectionFactory(new NpgsqlDataSourceBuilder(connectionString).Build()));

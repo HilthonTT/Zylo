@@ -7,21 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8DF20426-6E9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9311A278-5ED5-47B5-B231-025AAAE5E0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Api", "src\Zylo.Api\Zylo.Api.csproj", "{CDA1E6C4-011F-4575-9DAB-9082A81AE8CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Api", "src\Zylo.Api\Zylo.Api.csproj", "{CDA1E6C4-011F-4575-9DAB-9082A81AE8CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{EECB343E-C260-4F36-8E0F-D01348D1458E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Domain", "src\Zylo.Domain\Zylo.Domain.csproj", "{6D22C660-E294-4346-9DF3-DF389534C289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Domain", "src\Zylo.Domain\Zylo.Domain.csproj", "{6D22C660-E294-4346-9DF3-DF389534C289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Application", "src\Zylo.Application\Zylo.Application.csproj", "{B60AD246-ED66-49AF-A7FA-24E705D6AA22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Application", "src\Zylo.Application\Zylo.Application.csproj", "{B60AD246-ED66-49AF-A7FA-24E705D6AA22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Infrastructure", "src\Zylo.Infrastructure\Zylo.Infrastructure.csproj", "{2CFB38D0-50A6-4AFA-A514-858188ED3BBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Infrastructure", "src\Zylo.Infrastructure\Zylo.Infrastructure.csproj", "{2CFB38D0-50A6-4AFA-A514-858188ED3BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Persistence", "src\Zylo.Persistence\Zylo.Persistence.csproj", "{16509026-B747-4E31-9D66-796A2985F65B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Persistence", "src\Zylo.Persistence\Zylo.Persistence.csproj", "{16509026-B747-4E31-9D66-796A2985F65B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{21111FE8-6CEB-4FFF-A65F-F69E92B042F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchitectureTests", "tests\ArchitectureTests\ArchitectureTests.csproj", "{028CDFF6-1A2C-4464-813D-24CAFC0518E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "tests\ArchitectureTests\ArchitectureTests.csproj", "{028CDFF6-1A2C-4464-813D-24CAFC0518E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Contracts", "src\Zylo.Contracts\Zylo.Contracts.csproj", "{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{028CDFF6-1A2C-4464-813D-24CAFC0518E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{028CDFF6-1A2C-4464-813D-24CAFC0518E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{028CDFF6-1A2C-4464-813D-24CAFC0518E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{2CFB38D0-50A6-4AFA-A514-858188ED3BBC} = {8DF20426-6E91-4170-82B6-BE42ADC9738C}
 		{16509026-B747-4E31-9D66-796A2985F65B} = {8DF20426-6E91-4170-82B6-BE42ADC9738C}
 		{028CDFF6-1A2C-4464-813D-24CAFC0518E4} = {9311A278-5ED5-47B5-B231-025AAAE5E0D1}
+		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6} = {8DF20426-6E91-4170-82B6-BE42ADC9738C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4396D7BF-FD51-401D-B523-46500FADB30A}

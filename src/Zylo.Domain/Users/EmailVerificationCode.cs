@@ -4,7 +4,7 @@ namespace Zylo.Domain.Users;
 
 public sealed class EmailVerificationCode : Entity, IAuditable
 {
-    public EmailVerificationCode(Guid id, Guid userId, int code, DateTime expiresOnUtc)
+    private EmailVerificationCode(Guid id, Guid userId, int code, DateTime expiresOnUtc)
         : base(id)
     {
         Ensure.NotNullOrEmpty(userId, nameof(userId));
@@ -24,6 +24,18 @@ public sealed class EmailVerificationCode : Entity, IAuditable
     /// </remarks>
     public EmailVerificationCode()
     {
+    }
+
+    public static EmailVerificationCode Create(Guid userId, DateTime utcNow)
+    {
+        var random = new Random();
+        int code = random.Next(100000, 1000000);
+
+        DateTime expiresOnUtc = utcNow.AddMinutes(15);
+
+        var verificationCode = new EmailVerificationCode(Guid.NewGuid(), userId, code, expiresOnUtc);
+
+        return verificationCode;
     }
 
     public Guid UserId { get; private set; }
