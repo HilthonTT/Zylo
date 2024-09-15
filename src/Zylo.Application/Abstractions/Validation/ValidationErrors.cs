@@ -21,4 +21,19 @@ internal static class ValidationErrors
         internal static readonly Error BadEmailFormat = Error.Problem(
             "CreateUser.BadEmailFormat", "The email format is wrong.");
     }
+
+    internal static class VerifyUser
+    {
+        internal static readonly Error CodeIsEmpty = Error.Problem(
+            "VerifyUser.CodeIsEmpty", "Please provide a valid code.");
+    }
+
+    internal static class ResendUserEmailVerification
+    {
+        internal static readonly Error EmailIsEmpty = Error.Problem(
+            "ResendUserEmailVerification.EmailIsEmpty", "The email is empty.");
+
+        internal static readonly Error BadEmailFormat = Error.Problem(
+            "ResendUserEmailVerification.BadEmailFormat", "The email format is wrong.");
+    }
 }

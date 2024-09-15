@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Zylo.Domain\Zylo.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\ResendEmail\" />
-  </ItemGroup>
-
 </Project>

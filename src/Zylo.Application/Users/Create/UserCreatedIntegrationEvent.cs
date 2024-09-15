@@ -2,4 +2,4 @@
 
 namespace Zylo.Application.Users.Create;
 
-public sealed record UserCreatedIntegrationEvent(Guid Id) : IIntegrationEvent;
+public sealed record UserCreatedIntegrationEvent(Guid Id) : IntegrationEvent(Id);
