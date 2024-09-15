@@ -16,12 +16,14 @@ internal sealed class EmailVerificationCodeRepository : IEmailVerificationCodeRe
     {
         return _context.EmailVerificationCodes
             .Where(ev => ev.Code == code && ev.ExpiresOnUtc > utcNow)
+            .Include(ev => ev.User)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
     public Task<EmailVerificationCode?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return _context.EmailVerificationCodes
+            .Include(ev => ev.User)
             .FirstOrDefaultAsync(ev => ev.Id == id, cancellationToken);
     }
 

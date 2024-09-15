@@ -6,9 +6,9 @@ using Zylo.Application.Abstractions.Notifications;
 using Zylo.Domain.Users;
 using Zylo.Domain.Users.ValueObjects;
 
-namespace Zylo.Application.Users;
+namespace Zylo.Application.Users.Create;
 
-internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid> 
+internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid>
 {
     private readonly IUserRepository _userRepository;
     private readonly IEmailVerificationCodeRepository _emailVerificationCodeRepository;
@@ -63,6 +63,12 @@ internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserComma
         _emailVerificationCodeRepository.Insert(verificationCode);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await _notificationService.SendAsync(
+            user,
+            "Email verification for Zylo",
+            $"Here's your verification code: {verificationCode.Code}",
+            cancellationToken);
 
         return user.Id;
     }

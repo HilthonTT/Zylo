@@ -11,11 +11,13 @@ using System.Text;
 using Zylo.Application.Abstractions.Authentication;
 using Zylo.Application.Abstractions.Caching;
 using Zylo.Application.Abstractions.Events;
+using Zylo.Application.Abstractions.Notifications;
 using Zylo.Application.Abstractions.Validation;
 using Zylo.Infrastructure.Authentication;
 using Zylo.Infrastructure.Authentication.Options;
 using Zylo.Infrastructure.Caching;
 using Zylo.Infrastructure.Events;
+using Zylo.Infrastructure.Notifications;
 using Zylo.Infrastructure.Notifications.Options;
 using Zylo.Infrastructure.Outbox;
 using Zylo.Infrastructure.Time;
@@ -42,6 +44,8 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(InfrastructureReference.Assembly, includeInternalTypes: true);
 
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+        services.AddTransient<INotificationService, NotificationService>();
 
         return services;
     }

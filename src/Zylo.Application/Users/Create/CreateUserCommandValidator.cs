@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Zylo.Application.Abstractions.Validation;
 
-namespace Zylo.Application.Users;
+namespace Zylo.Application.Users.Create;
 
 internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {

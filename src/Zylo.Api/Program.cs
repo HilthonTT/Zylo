@@ -1,3 +1,4 @@
+using System.Reflection;
 using Zylo.Api.Extensions;
 using Zylo.Application;
 using Zylo.Infrastructure;
@@ -13,7 +14,11 @@ builder.Services
     .AddPersistence(builder.Configuration)
     .AddApplication();
 
+builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
+
 WebApplication app = builder.Build();
+
+app.MapEndpoints();
 
 app.UseBackgroundJobs();
 
@@ -26,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 await app.RunAsync();
 
