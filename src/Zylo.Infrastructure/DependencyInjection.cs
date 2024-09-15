@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddServices();
         services.AddMessaging();
         services.AddAuthenticationInternal();
+        services.AddAuthorizationInternal();
         services.AddNotifications();
 
         services.AddBackgroundJobs(configuration);
@@ -111,7 +112,7 @@ public static class DependencyInjection
     {
         services.AddOptionsWithFluentValidation<JwtOptions>(JwtOptions.ConfigurationSection);
 
-        using var serviceProvider = services.BuildServiceProvider();
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
 
         var jwtOptions = serviceProvider.GetRequiredService<IOptions<JwtOptions>>().Value;
 
@@ -132,6 +133,13 @@ public static class DependencyInjection
         services.AddScoped<IUserContext, UserContext>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<ITokenProvider, TokenProvider>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddAuthorizationInternal(this IServiceCollection services)
+    {
+        services.AddAuthorization();
 
         return services;
     }

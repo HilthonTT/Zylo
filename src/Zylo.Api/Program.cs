@@ -1,4 +1,8 @@
+using Asp.Versioning.Builder;
+using Asp.Versioning;
+using Hangfire;
 using System.Reflection;
+using Zylo.Api;
 using Zylo.Api.Extensions;
 using Zylo.Application;
 using Zylo.Infrastructure;
@@ -6,26 +10,40 @@ using Zylo.Persistence;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenWithAuth();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddPersistence(builder.Configuration)
-    .AddApplication();
+    .AddApplication()
+    .AddPresentation();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
 WebApplication app = builder.Build();
 
-app.MapEndpoints();
+ApiVersionSet apiVersionSet = app.NewApiVersionSet()
+    .HasApiVersion(new ApiVersion(1))
+    .ReportApiVersions()
+    .Build();
+
+RouteGroupBuilder versionedGroup = app
+    .MapGroup("api/v{version:apiVersion}")
+    .WithApiVersionSet(apiVersionSet);
+
+app.MapEndpoints(versionedGroup);
 
 app.UseBackgroundJobs();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerWithUi();
+
+    app.UseHangfireDashboard(options: new DashboardOptions
+    {
+        Authorization = [],
+        DarkModeEnabled = false
+    });
 
     app.ApplyMigrations();
 }
@@ -33,6 +51,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseAuthorization();
 
 await app.RunAsync();
 
