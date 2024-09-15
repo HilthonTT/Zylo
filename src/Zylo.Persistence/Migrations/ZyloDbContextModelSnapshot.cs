@@ -420,8 +420,8 @@ namespace Zylo.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("jsonb");
+                        .HasColumnType("jsonb")
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedOnUtc")
                         .HasColumnType("timestamp with time zone")
@@ -436,9 +436,9 @@ namespace Zylo.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("Processed")
+                    b.Property<DateTime?>("ProcessedOnUtc")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("processed");
+                        .HasColumnName("processed_on_utc");
 
                     b.HasKey("Id")
                         .HasName("pk_outbox_messages");

@@ -16,6 +16,7 @@ using Zylo.Application.Abstractions.Validation;
 using Zylo.Infrastructure.Authentication;
 using Zylo.Infrastructure.Authentication.Options;
 using Zylo.Infrastructure.Caching;
+using Zylo.Infrastructure.Emails;
 using Zylo.Infrastructure.Events;
 using Zylo.Infrastructure.Notifications;
 using Zylo.Infrastructure.Notifications.Options;
@@ -61,6 +62,8 @@ public static class DependencyInjection
         services
             .AddFluentEmail(emailOptions.SenderEmail, emailOptions.Sender)
             .AddSmtpSender(emailOptions.Host, emailOptions.Port);
+
+        services.AddHostedService<EmailVerificationCodeProcessorJob>();
 
         return services;
     }

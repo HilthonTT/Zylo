@@ -7,6 +7,7 @@ using Zylo.Domain.Friendships;
 using Zylo.Domain.Invitations;
 using Zylo.Domain.Notifications;
 using Zylo.Domain.Users;
+using Zylo.Persistence.Outbox;
 
 namespace Zylo.Persistence;
 
@@ -36,6 +37,8 @@ public sealed class ZyloDbContext : DbContext, IUnitOfWork
     public DbSet<PersonalEvent> PersonalEvents { get; set; }
 
     public DbSet<GroupEvent> GroupEvents { get; set; }
+
+    public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

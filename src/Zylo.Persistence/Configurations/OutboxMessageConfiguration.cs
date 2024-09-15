@@ -10,6 +10,6 @@ internal sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outb
     {
         builder.ToTable("outbox_messages");
 
-        builder.Property(o => o.Content).HasColumnName("jsonb");
+        builder.Property(o => o.Content).HasColumnType("jsonb");
     }
 }

@@ -5,5 +5,5 @@ public sealed record OutboxMessage(
     string Name, 
     string Content, 
     DateTime CreatedOnUtc, 
-    DateTime? Processed = null, 
+    DateTime? ProcessedOnUtc = null, 
     string? Error = null);

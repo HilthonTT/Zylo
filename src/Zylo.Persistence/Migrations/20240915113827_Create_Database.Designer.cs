@@ -12,7 +12,7 @@ using Zylo.Persistence;
 namespace Zylo.Persistence.Migrations
 {
     [DbContext(typeof(ZyloDbContext))]
-    [Migration("20240914105208_Create_Database")]
+    [Migration("20240915113827_Create_Database")]
     partial class Create_Database
     {
         /// <inheritdoc />
@@ -423,8 +423,8 @@ namespace Zylo.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("jsonb");
+                        .HasColumnType("jsonb")
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedOnUtc")
                         .HasColumnType("timestamp with time zone")
@@ -439,9 +439,9 @@ namespace Zylo.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("Processed")
+                    b.Property<DateTime?>("ProcessedOnUtc")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("processed");
+                        .HasColumnName("processed_on_utc");
 
                     b.HasKey("Id")
                         .HasName("pk_outbox_messages");

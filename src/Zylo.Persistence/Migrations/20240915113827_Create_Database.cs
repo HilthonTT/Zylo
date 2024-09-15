@@ -17,9 +17,9 @@ namespace Zylo.Persistence.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
-                    jsonb = table.Column<string>(type: "text", nullable: false),
+                    content = table.Column<string>(type: "jsonb", nullable: false),
                     created_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    processed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    processed_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     error = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
