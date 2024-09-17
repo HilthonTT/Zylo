@@ -40,7 +40,7 @@ public sealed class User : Entity, IAuditable, ISoftDeletable
 
     public LastName LastName { get; private set; }
 
-    public string FullName => $"{FirstName} {LastName}";
+    public string FullName => $"{FirstName.Value} {LastName.Value}";
 
     public string PasswordHash { get; private set; }
 

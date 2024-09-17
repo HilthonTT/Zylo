@@ -8,6 +8,11 @@ public record Error
         "Null value was provided",
         ErrorType.Failure);
 
+    public static readonly Error UnProcessableRequest = new(
+        "General.UnProcessableRequest", 
+        "The server could not process the request", 
+        ErrorType.Problem);
+
     public Error(string code, string description, ErrorType type)
     {
         Code = code;

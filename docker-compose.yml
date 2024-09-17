@@ -1,6 +1,7 @@
 services:
   zylo.api:
     image: ${DOCKER_REGISTRY-}zyloapi
+    container_name: zylo.api
     build:
       context: .
       dockerfile: src/Zylo.Api/Dockerfile
