@@ -11,7 +11,7 @@ using Zylo.Persistence.Outbox;
 
 namespace Zylo.Persistence;
 
-public sealed class ZyloDbContext : DbContext, IUnitOfWork
+public sealed class ZyloDbContext : DbContext, IUnitOfWork, IDbContext
 {
     public ZyloDbContext(DbContextOptions options) 
         : base(options)

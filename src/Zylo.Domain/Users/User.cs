@@ -1,4 +1,7 @@
 ﻿using SharedKernel;
+using Zylo.Domain.Events;
+using Zylo.Domain.Events.DomainEvents;
+using Zylo.Domain.Events.ValueObjects;
 using Zylo.Domain.Friendships;
 using Zylo.Domain.Friendships.DomainEvents;
 using Zylo.Domain.Users.DomainEvents;
@@ -136,5 +139,14 @@ public sealed class User : Entity, IAuditable, ISoftDeletable
         Raise(new FriendRequestSentDomainEvent(friendRequest.Id));
 
         return friendRequest;
+    }
+
+    public PersonalEvent CreatePersonalEvent(Name name, Category category, DateTime dateTimeUtc)
+    {
+        var personalEvent = new PersonalEvent(Id, name, category, dateTimeUtc);
+
+        Raise(new PersonalEventCreatedDomainEvent(personalEvent.Id));
+
+        return personalEvent;
     }
 }

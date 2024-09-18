@@ -6,17 +6,17 @@ internal static class ValidationErrors
 {
     internal static class CreateUser
     {
-        internal static readonly Error FirstNameIsEmpty = Error.Problem(
-            "CreateUser.FirstNameIsEmpty", "The first name is empty.");
+        internal static readonly Error FirstNameIsRequired = Error.Problem(
+            "CreateUser.FirstNameIsRequired", "The first name is required.");
 
-        internal static readonly Error LastNameIsEmpty = Error.Problem(
-            "CreateUser.LastNameIsEmpty", "The last name is empty.");
+        internal static readonly Error LastNameIsRequired = Error.Problem(
+            "CreateUser.LastNameIsRequired", "The last name is required.");
 
-        internal static readonly Error PasswordIsEmpty = Error.Problem(
-            "CreateUser.PasswordIsEmpty", "The password is empty.");
+        internal static readonly Error PasswordIsRequired = Error.Problem(
+            "CreateUser.PasswordIsRequired", "The password is emrequiredpty.");
 
-        internal static readonly Error EmailIsEmpty = Error.Problem(
-            "CreateUser.EmailIsEmpty", "The email is empty.");
+        internal static readonly Error EmailIsRequired = Error.Problem(
+            "CreateUser.EmailIsRequired", "The email is required.");
 
         internal static readonly Error BadEmailFormat = Error.Problem(
             "CreateUser.BadEmailFormat", "The email format is wrong.");
@@ -30,8 +30,8 @@ internal static class ValidationErrors
 
     internal static class ResendUserEmailVerification
     {
-        internal static readonly Error EmailIsEmpty = Error.Problem(
-            "ResendUserEmailVerification.EmailIsEmpty", "The email is empty.");
+        internal static readonly Error EmailIsRequired = Error.Problem(
+            "ResendUserEmailVerification.EmailIsRequired", "The email is required.");
 
         internal static readonly Error BadEmailFormat = Error.Problem(
             "ResendUserEmailVerification.BadEmailFormat", "The email format is wrong.");
@@ -39,56 +39,91 @@ internal static class ValidationErrors
 
     internal static class SendFriendRequest
     {
-        internal static readonly Error UserIdIsEmpty = Error.Problem(
-            "SendFriendRequest.UserIdIsEmpty",
-            "The user identifier is empty.");
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "SendFriendRequest.UserIdIsRequired",
+            "The user identifier is required.");
 
-        internal static readonly Error FriendIdIsEmpty = Error.Problem(
-            "SendFriendRequest.FriendIdIsEmpty",
-            "The friend identifier is empty.");
+        internal static readonly Error FriendIdIsRequired = Error.Problem(
+            "SendFriendRequest.FriendIdIsRequired", "The friend identifier is required.");
     }
 
     internal static class UpdateUser
     {
-        internal static readonly Error UserIdIsEmpty = Error.Problem(
-            "UpdateUser.UserIdIsEmpty",
-            "The user identifier is empty.");
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "UpdateUser.UserIdIsRequired", "The user identifier is required.");
 
-        internal static readonly Error FirstNameIsEmpty = Error.Problem(
-            "UpdateUser.FirstNameIsEmpty", 
-            "The first name is empty.");
+        internal static readonly Error FirstNameIsRequired = Error.Problem(
+            "UpdateUser.FirstNameIsRequired", "The first name is required.");
 
-        internal static readonly Error LastNameIsEmpty = Error.Problem(
-            "UpdateUser.LastNameIsEmpty", 
-            "The last name is empty.");
+        internal static readonly Error LastNameIsRequired = Error.Problem(
+            "UpdateUser.LastNameIsRequired", "The last name is required.");
     }
 
     internal static class Login
     {
-        internal static readonly Error EmailIsEmpty = Error.Problem(
-            "Login.EmailIsEmpty", 
-            "The email is empty.");
+        internal static readonly Error EmailIsRequired = Error.Problem(
+            "Login.EmailIsRequired", "The email is required.");
 
         internal static readonly Error BadEmailFormat = Error.Problem(
             "Login.BadEmailFormat", "The email format is wrong.");
 
-        internal static readonly Error PasswordIsEmpty = Error.Problem(
-            "Login.PasswordIsEmpty",
-            "The password is required.");
+        internal static readonly Error PasswordIsRequired = Error.Problem(
+            "Login.PasswordIsRequired", "The password is required.");
     }
 
     internal static class ChangePassword
     {
-        internal static readonly Error UserIdIsEmpty = Error.Problem(
-            "ChangePassword.UserIdIsEmpty", 
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "ChangePassword.UserIdIsRequired", 
             "The user identifier is required.");
 
-        internal static readonly Error CurrentPasswordIsEmpty = Error.Problem(
-            "ChangePassword.CurrentPasswordIsEmpty", 
+        internal static readonly Error CurrentPasswordIsRequired = Error.Problem(
+            "ChangePassword.CurrentPasswordIsRequired", 
             "The password is required.");
 
-        internal static readonly Error NewPasswordIsEmpty = Error.Problem(
-            "ChangePassword.NewPasswordIsEmpty",
+        internal static readonly Error NewPasswordIsRequired = Error.Problem(
+            "ChangePassword.NewPasswordIsRequired",
             "The password is required.");
+    }
+
+    internal static class CreatePersonalEvent
+    {
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "CreatePersonalEvent.UserIdIsRequired",
+            "The user identifier is required.");
+
+        internal static readonly Error NameIsRequired = Error.Problem(
+            "CreatePersonalEvent.NameIsRequired",
+            "The event name is required.");
+
+        internal static readonly Error CategoryIdIsRequired = Error.Problem(
+            "CreatePersonalEvent.CategoryIdIsRequired",
+            "The category identifier is required.");
+
+        internal static readonly Error DateAndTimeIsRequired = Error.Problem(
+            "CreatePersonalEvent.DateAndTimeIsRequired",
+            "The date and time of the event is required.");
+    }
+
+    internal static class CancelPersonalEvent
+    {
+        internal static readonly Error PersonalEventIdIsRequired = Error.Problem(
+            "CancelPersonalEvent.PersonalEventIdIsRequired",
+            "The personal event identifier is required.");
+    }
+
+    internal static class UpdatePersonalEvent
+    {
+        internal static readonly Error PersonalEventIdIsRequired = Error.Problem(
+            "UpdatePersonalEvent.PersonalEventIdIsRequired",
+            "The group event identifier is required.");
+
+        internal static readonly Error NameIsRequired = Error.Problem(
+            "UpdatePersonalEvent.NameIsRequired", 
+            "The event name is required.");
+
+        internal static readonly Error DateAndTimeIsRequired = Error.Problem(
+            "UpdatePersonalEvent.DateAndTimeIsRequired",
+            "The date and time of the event is required.");
     }
 }

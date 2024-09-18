@@ -7,8 +7,8 @@ internal sealed class SendFriendRequestValidator : AbstractValidator<SendFriendR
 {
     public SendFriendRequestValidator()
     {
-        RuleFor(x => x.UserId).NotEmpty().WithError(ValidationErrors.SendFriendRequest.UserIdIsEmpty);
+        RuleFor(x => x.UserId).NotEmpty().WithError(ValidationErrors.SendFriendRequest.UserIdIsRequired);
 
-        RuleFor(x => x.FriendId).NotEmpty().WithError(ValidationErrors.SendFriendRequest.FriendIdIsEmpty);
+        RuleFor(x => x.FriendId).NotEmpty().WithError(ValidationErrors.SendFriendRequest.FriendIdIsRequired);
     }
 }

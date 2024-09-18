@@ -42,6 +42,8 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ZyloDbContext>());
 
+        services.AddScoped<IDbContext>(sp => sp.GetRequiredService<ZyloDbContext>());
+
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAttendeeRepository, AttendeeRepository>();
         services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
@@ -50,6 +52,7 @@ public static class DependencyInjection
         services.AddScoped<IInvitationRepository, InvitationRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
         services.AddScoped<IEmailVerificationCodeRepository, EmailVerificationCodeRepository>();
+        services.AddScoped<IPersonalEventRepository, PersonalEventRepository>();
 
         services.AddSingleton<IDbConnectionFactory>(_ =>
             new DbConnectionFactory(new NpgsqlDataSourceBuilder(connectionString).Build()));

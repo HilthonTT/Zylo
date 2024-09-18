@@ -10,7 +10,7 @@ internal sealed class ResendUserEmailVerificationCommandValidator
     public ResendUserEmailVerificationCommandValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty().WithError(ValidationErrors.ResendUserEmailVerification.EmailIsEmpty)
+            .NotEmpty().WithError(ValidationErrors.ResendUserEmailVerification.EmailIsRequired)
             .EmailAddress().WithError(ValidationErrors.ResendUserEmailVerification.BadEmailFormat);
     }
 }
