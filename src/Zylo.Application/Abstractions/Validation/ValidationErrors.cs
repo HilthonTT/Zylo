@@ -126,4 +126,23 @@ internal static class ValidationErrors
             "UpdatePersonalEvent.DateAndTimeIsRequired",
             "The date and time of the event is required.");
     }
+
+    internal static class CreateGroupEvent
+    {
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "CreateGroupEvent.UserIdIsRequired",
+            "The user identifier is required.");
+
+        internal static readonly Error NameIsRequired = Error.Problem(
+            "CreateGroupEvent.NameIsRequired", 
+            "The event name is required.");
+
+        internal static readonly Error CategoryIdIsRequired = Error.Problem(
+            "CreateGroupEvent.CategoryIdIsRequired",
+            "The category identifier is required.");
+
+        internal static readonly Error DateAndTimeIsRequired = Error.Problem(
+            "CreateGroupEvent.DateAndTimeIsRequired",
+            "The date and time of the event is required.");
+    }
 }
