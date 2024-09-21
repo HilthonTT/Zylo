@@ -34,12 +34,12 @@ internal sealed class InvitationRepository : IInvitationRepository
     }
 
     public Task RemoveInvitationsForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow, 
         CancellationToken cancellationToken = default)
     {
         return _context.Invitations
-            .Where(i => i.EventId == groupEvent.Id)
+            .Where(i => i.EventId == groupEventId)
             .ExecuteUpdateAsync(setters => setters
                 .SetProperty(i => i.DeletedOnUtc, utcNow)
                 .SetProperty(i => i.IsDeleted, true),

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Zylo.Domain.Events;
+using Zylo.Domain.Users;
 
 namespace Zylo.Persistence.Repositories;
 
@@ -15,6 +16,32 @@ internal sealed class AttendeeRepository : IAttendeeRepository
     public Task<Attendee?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return _context.Attendees.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
+    }
+
+    public async Task<List<User>> GetUsersForGroupEventAsync(
+        GroupEvent groupEvent, 
+        CancellationToken cancellationToken = default)
+    {
+        var attendees = await _context
+           .GroupEvents
+           .Where(g => g.Id == groupEvent.Id)
+           .Join(_context.Attendees,
+               @event => @event.Id,
+               attendee => attendee.EventId,
+               (@event, attendee) => new { @event, attendee })
+           .Join(_context.Users,
+               eventAttendee => eventAttendee.attendee.UserId,
+               user => user.Id,
+               (eventAttendee, user) => new
+               {
+                   eventAttendee.@event,
+                   eventAttendee.attendee,
+                   user,
+               })
+           .Where(result => result.attendee.UserId != groupEvent.UserId)
+           .ToListAsync(cancellationToken);
+
+        return attendees.Select(x => x.user).ToList();
     }
 
     public async Task<(string Email, string Name)[]> GetEmailsAndNamesForGroupEvent(
@@ -66,12 +93,12 @@ internal sealed class AttendeeRepository : IAttendeeRepository
     }
 
     public Task MarkUnprocessedForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow, 
         CancellationToken cancellationToken = default)
     {
         return _context.Attendees
-            .Where(a => a.EventId == groupEvent.Id && !a.IsDeleted)
+            .Where(a => a.EventId == groupEventId && !a.IsDeleted)
             .ExecuteUpdateAsync(setters => setters
                 .SetProperty(a => a.Processed, false)
                 .SetProperty(a => a.ModifiedOnUtc, utcNow),
@@ -79,12 +106,12 @@ internal sealed class AttendeeRepository : IAttendeeRepository
     }
 
     public Task RemoveAttendeesForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow, 
         CancellationToken cancellationToken = default)
     {
         return _context.Attendees
-            .Where(a => a.EventId == groupEvent.Id && !a.IsDeleted)
+            .Where(a => a.EventId == groupEventId && !a.IsDeleted)
             .ExecuteUpdateAsync(setters => setters
                 .SetProperty(a => a.IsDeleted, true)
                 .SetProperty(a => a.DeletedOnUtc, utcNow),

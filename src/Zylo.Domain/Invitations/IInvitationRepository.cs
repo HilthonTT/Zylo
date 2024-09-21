@@ -18,7 +18,7 @@ public interface IInvitationRepository
         CancellationToken cancellationToken = default);
 
     Task RemoveInvitationsForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow,
         CancellationToken cancellationToken = default);
 }

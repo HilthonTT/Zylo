@@ -4,6 +4,8 @@ namespace Zylo.Contracts.Common;
 
 public sealed class PagedList<T>
 {
+    private const int MaxPageSize = 100;
+
     private PagedList(List<T> items, int page, int pageSize, int totalCount)
     {
         Items = items;
@@ -31,6 +33,8 @@ public sealed class PagedList<T>
         CancellationToken cancellationToken = default)
     {
         int totalCount = await query.CountAsync(cancellationToken);
+
+        pageSize = Math.Min(Math.Max(pageSize, 0), MaxPageSize);
 
         List<T> items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 

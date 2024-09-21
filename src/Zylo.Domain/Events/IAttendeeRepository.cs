@@ -1,4 +1,6 @@
-﻿namespace Zylo.Domain.Events;
+﻿using Zylo.Domain.Users;
+
+namespace Zylo.Domain.Events;
 
 public interface IAttendeeRepository
 {
@@ -13,12 +15,14 @@ public interface IAttendeeRepository
     void Insert(Attendee attendee);
 
     Task MarkUnprocessedForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow, 
         CancellationToken cancellationToken = default);
 
     Task RemoveAttendeesForGroupEventAsync(
-        GroupEvent groupEvent, 
+        Guid groupEventId, 
         DateTime utcNow, 
         CancellationToken cancellationToken = default);
+
+    Task<List<User>> GetUsersForGroupEventAsync(GroupEvent groupEvent, CancellationToken cancellationToken = default);
 }

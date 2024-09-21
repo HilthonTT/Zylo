@@ -145,4 +145,11 @@ internal static class ValidationErrors
             "CreateGroupEvent.DateAndTimeIsRequired",
             "The date and time of the event is required.");
     }
+
+    internal static class CancelGroupEvent
+    {
+        internal static readonly Error GroupEventIdIsRequired = Error.Problem(
+            "CancelGroupEvent.GroupEventIdIsRequired",
+            "The group event identifier is required.");
+    }
 }
