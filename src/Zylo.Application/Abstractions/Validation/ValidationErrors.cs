@@ -152,4 +152,32 @@ internal static class ValidationErrors
             "CancelGroupEvent.GroupEventIdIsRequired",
             "The group event identifier is required.");
     }
+
+    internal static class UpdateGroupEvent
+    {
+        internal static readonly Error GroupEventIdIsRequired = Error.Problem(
+            "UpdateGroupEvent.GroupEventIdIsRequired",
+            "The group event identifier is required.");
+
+        internal static readonly Error NameIsRequired = Error.Problem(
+            "UpdateGroupEvent.NameIsRequired", "The event name is required.");
+
+        internal static readonly Error DateAndTimeIsRequired = Error.Problem(
+            "UpdateGroupEvent.DateAndTimeIsRequired",
+            "The date and time of the event is required.");
+
+        internal static readonly Error NameIsTooLong = Error.Problem(
+            "UpdateGroupEvent.IsTooLong", "The event name is too long");
+    }
+
+    internal static class InviteFriendToGroupEvent
+    {
+        internal static readonly Error GroupEventIdIsRequired = Error.Problem(
+            "InviteFriendToGroupEvent.GroupEventIdIsRequired",
+            "The group event identifier is required.");
+
+        internal static readonly Error FriendIdIsRequired = Error.Problem(
+            "InviteFriendToGroupEvent.FriendIdIsRequired",
+            "The friend identifier is required.");
+    }
 }

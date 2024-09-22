@@ -6,7 +6,7 @@ namespace Zylo.Application.GroupEvents.Get;
 
 public sealed record GetGroupEventsQuery(
     Guid UserId,
-    string Name,
+    string? Name,
     int? CategoryId,
     DateTime? StartDate,
     DateTime? EndDate,
