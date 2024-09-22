@@ -7,8 +7,14 @@ using Zylo.Api.Extensions;
 using Zylo.Application;
 using Zylo.Infrastructure;
 using Zylo.Persistence;
+using Serilog;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig) =>
+    loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddSwaggerGenWithAuth();
 
@@ -50,9 +56,20 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapHealthChecks("health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+});
+
+app.UseRequestContextLogging();
+
+app.UseSerilogRequestLogging();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseExceptionHandler();
 
 await app.RunAsync();
 

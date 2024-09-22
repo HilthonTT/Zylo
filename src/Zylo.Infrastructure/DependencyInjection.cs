@@ -37,6 +37,7 @@ public static class DependencyInjection
 
         services.AddBackgroundJobs(configuration);
         services.AddCaching(configuration);
+        services.AddHealthChecks(configuration);
 
         return services;
     }
@@ -104,6 +105,22 @@ public static class DependencyInjection
         services.AddHangfireServer(options => options.SchedulePollingInterval = TimeSpan.FromSeconds(1));
 
         services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
+    {
+        string? connectionString = configuration.GetConnectionString("Database");
+        Ensure.NotNullOrEmpty(connectionString, nameof(connectionString));
+
+        string? redisConnectionString = configuration.GetConnectionString("Cache");
+        Ensure.NotNullOrEmpty(redisConnectionString, nameof(redisConnectionString));
+
+
+        services.AddHealthChecks()
+            .AddNpgSql(connectionString)
+            .AddRedis(redisConnectionString);
 
         return services;
     }

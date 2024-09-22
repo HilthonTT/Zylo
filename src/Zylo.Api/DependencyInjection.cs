@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Zylo.Api.Infrastructure;
 using Zylo.Api.OpenApi;
 
 namespace Zylo.Api;
@@ -21,6 +22,9 @@ public static class DependencyInjection
         });
 
         services.ConfigureOptions<ConfigureSwaggerGenOptions>();
+
+        services.AddProblemDetails();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
 
         return services;
     }
