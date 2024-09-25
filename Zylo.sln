@@ -23,7 +23,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "tests\ArchitectureTests\ArchitectureTests.csproj", "{028CDFF6-1A2C-4464-813D-24CAFC0518E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zylo.Contracts", "src\Zylo.Contracts\Zylo.Contracts.csproj", "{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zylo.Contracts", "src\Zylo.Contracts\Zylo.Contracts.csproj", "{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.UnitTests", "tests\Domain.UnitTests\Domain.UnitTests.csproj", "{C5CAEFB4-5F48-4BD0-937C-6951AE464B50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CAEFB4-5F48-4BD0-937C-6951AE464B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CAEFB4-5F48-4BD0-937C-6951AE464B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CAEFB4-5F48-4BD0-937C-6951AE464B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CAEFB4-5F48-4BD0-937C-6951AE464B50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{16509026-B747-4E31-9D66-796A2985F65B} = {8DF20426-6E91-4170-82B6-BE42ADC9738C}
 		{028CDFF6-1A2C-4464-813D-24CAFC0518E4} = {9311A278-5ED5-47B5-B231-025AAAE5E0D1}
 		{190A24B3-8C9C-421B-BD58-4B6D6A477EC6} = {8DF20426-6E91-4170-82B6-BE42ADC9738C}
+		{C5CAEFB4-5F48-4BD0-937C-6951AE464B50} = {9311A278-5ED5-47B5-B231-025AAAE5E0D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4396D7BF-FD51-401D-B523-46500FADB30A}
