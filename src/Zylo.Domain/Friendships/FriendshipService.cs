@@ -16,21 +16,21 @@ public sealed class FriendshipService
         _friendshipRepository = friendshipRepository;
     }
 
-    public async Task CreateFriendshipAsync(FriendRequest friendRequest)
+    public async Task CreateFriendshipAsync(FriendRequest friendRequest, CancellationToken cancellationToken = default)
     {
         if (friendRequest.Rejected)
         {
             throw new DomainException(FriendRequestErrors.AlreadyRejected);
         }
 
-        User? user = await _userRepository.GetByIdAsync(friendRequest.UserId);
+        User? user = await _userRepository.GetByIdAsync(friendRequest.UserId, cancellationToken);
 
         if (user is null)
         {
             throw new DomainException(FriendRequestErrors.UserNotFound(friendRequest.UserId));
         }
 
-        User? friend = await _userRepository.GetByIdAsync(friendRequest.FriendId);
+        User? friend = await _userRepository.GetByIdAsync(friendRequest.FriendId, cancellationToken);
 
         if (friend is null)
         {
@@ -42,23 +42,23 @@ public sealed class FriendshipService
         _friendshipRepository.Insert(Friendship.Create(friend.Id, user.Id));
     }
 
-    public async Task<Result> RemoveFriendshipAsync(FriendRequest friendRequest)
+    public async Task<Result> RemoveFriendshipAsync(Guid userId, Guid friendId, CancellationToken cancellationToken = default)
     {
-        User? user = await _userRepository.GetByIdAsync(friendRequest.UserId);
+        User? user = await _userRepository.GetByIdAsync(userId);
 
         if (user is null)
         {
-            return Result.Failure(FriendRequestErrors.UserNotFound(friendRequest.UserId));
+            return Result.Failure(FriendRequestErrors.UserNotFound(userId));
         }
 
-        User? friend = await _userRepository.GetByIdAsync(friendRequest.FriendId);
+        User? friend = await _userRepository.GetByIdAsync(friendId);
 
         if (friend is null)
         {
-            return Result.Failure(FriendRequestErrors.FriendNotFound(friendRequest.FriendId));
+            return Result.Failure(FriendRequestErrors.FriendNotFound(friendId));
         }
 
-        if (!await _friendshipRepository.CheckIfFriendsAsync(user.Id, friend.Id))
+        if (!await _friendshipRepository.CheckIfFriendsAsync(user.Id, friend.Id, cancellationToken))
         {
             return Result.Failure(FriendshipErrors.NotFriends);
         }

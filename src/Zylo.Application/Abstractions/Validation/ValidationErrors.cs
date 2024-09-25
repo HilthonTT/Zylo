@@ -180,4 +180,22 @@ internal static class ValidationErrors
             "InviteFriendToGroupEvent.FriendIdIsRequired",
             "The friend identifier is required.");
     }
+
+    internal static class RemoveFriendship
+    {
+        internal static readonly Error UserIdIsRequired = Error.Problem(
+            "RemoveFriendship.UserIdIsRequired",
+            "The user identifier is required.");
+
+        internal static readonly Error FriendIdIsRequired = Error.Problem(
+            "RemoveFriendship.FriendIdIsRequired",
+            "The friend identifier is required.");
+    }
+
+    internal static class AcceptFriendshipRequest
+    {
+        internal static readonly Error FriendshipRequestIdIsRequired = Error.Problem(
+            "AcceptFriendshipRequest.FriendshipRequestIdIsRequired",
+            "The invitation identifier is required.");
+    }
 }

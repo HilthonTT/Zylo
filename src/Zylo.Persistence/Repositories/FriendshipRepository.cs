@@ -12,9 +12,14 @@ internal sealed class FriendshipRepository : IFriendshipRepository
         _context = context;
     }
 
-    public async Task<bool> CheckIfFriendsAsync(Guid userId, Guid friendId, CancellationToken cancellationToken = default)
+    public Task<Friendship?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Friendships.AnyAsync(f => f.UserId == userId && f.FriendId == friendId, cancellationToken);
+        return _context.Friendships.FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
+    }
+
+    public Task<bool> CheckIfFriendsAsync(Guid userId, Guid friendId, CancellationToken cancellationToken = default)
+    {
+        return _context.Friendships.AnyAsync(f => f.UserId == userId && f.FriendId == friendId, cancellationToken);
     }
 
     public void Insert(Friendship friendship)
