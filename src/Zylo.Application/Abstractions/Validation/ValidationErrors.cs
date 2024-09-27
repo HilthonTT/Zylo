@@ -198,4 +198,11 @@ internal static class ValidationErrors
             "AcceptFriendshipRequest.FriendshipRequestIdIsRequired",
             "The invitation identifier is required.");
     }
+
+    internal static class RejectFriendshipRequest
+    {
+        internal static readonly Error FriendshipRequestIdIsRequired = Error.Problem(
+            "RejectFriendshipRequest.FriendshipRequestIdIsRequired",
+            "The invitation identifier is required.");
+    }
 }

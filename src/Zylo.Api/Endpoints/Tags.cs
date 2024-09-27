@@ -9,4 +9,6 @@ public static class Tags
     public const string GroupEvents = "Group-Events";
 
     public const string Friendships = "Friendships";
+
+    public const string FriendRequests = "Friend-Requests";
 }
